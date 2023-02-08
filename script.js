@@ -15,14 +15,29 @@ const Gameboard = (function() {
   };
 })();
 
+// Game Logic
+
+const GamePlay = () => {
+
+};
 
 // Render GameBoard on Webpage
 const GameBoardContents = () => {
-    const gameBoardDiv = document.querySelector("#gameboard");
+    const gameBoardDiv = document.querySelectorAll(".place");
     gameBoardDiv.textContent = Gameboard.getGameboard()
-}
+    
+    // Event Listener for 3x3 Squares
+    gameBoardDiv.forEach((square) => {
+        square.addEventListener("click", () => {
+            
+        });
 
+    });
+}
 GameBoardContents()
+
+
+
 
 
 
