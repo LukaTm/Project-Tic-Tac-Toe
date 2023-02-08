@@ -1,0 +1,13 @@
+.container {
+    display: grid;
+    width: 500px;
+    height: 500px;
+    grid-template-rows: repeat(3,1fr);
+    grid-template-columns:repeat(3,1fr);
+    grid-gap: 10px;
+    background-color: blue;
+}
+
+#gameboard{
+    background-color: red;
+}
