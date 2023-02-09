@@ -1,7 +1,7 @@
 let gameArray = [];
 let gameArray2player = [];
 
-const GamePlay = () => {
+const GameBoardContents = () => {
     let player1Symbol = 'X'
     let player2Symbol = 'O'
     let player1Turn = true; 
@@ -36,8 +36,17 @@ const GamePlay = () => {
 		}
 		}
 	}
+
+
+
 	// FindS Winner 
-	const FindWinner = (playerWhoWon,array) =>{
+	const FindWinner = (playerWhoWon,array,name1,name2) =>{
+		// Tie Display
+		const winnerText = document.querySelector('#game-result')
+		if (gameArray.length + gameArray2player.length === 9){
+			winnerText.textContent = `Tie`
+		}
+		else{
 		let winCombos = [
 			[1, 2, 3],[4, 5, 6],[7, 8, 9],[1, 4, 7],[2, 5, 8],[3, 6, 9],[1, 5, 9],[3, 5, 7],
 		];
@@ -51,18 +60,41 @@ const GamePlay = () => {
 		// Checks if anyone WON with arrayToCompare and WinCombos
 		winCombos.forEach((oneWinCombo) => {
 			if (oneWinCombo.every(val => arrayToCompare.includes(val))){
-				console.log(playerWhoWon)
-
+				if (playerWhoWon === 1){
+				winnerText.textContent = `Congrats ${name1}`
+				}
+				else{
+					winnerText.textContent = `Congrats ${name2}`
+				}
+				document.getElementById("gameboard").style.pointerEvents = "none";
+				
 			}
 		});
 	}
+	}
+	// Resets ALL values of Game
+	const resetGame = () => {
+		gameArray = [];
+		gameArray2player = [];
+		player1Turn = true; 
+		player2Turn = false;
+		playerName = '';
+		player2Name = '';
+		const gameBoardDiv = document.querySelectorAll(".place");
+		gameBoardDiv.forEach((square) => {
+			square.removeAttribute('id');
+			square.textContent = '';
+		});
+		const winnerText = document.querySelector('#game-result');
+		winnerText.textContent = '';
+		document.getElementById("gameboard").style.pointerEvents = "auto";
+	};
 
-    // Plays the game AND displays it on Screen
-    return { ChangePlayer ,GameLogic ,FindWinner}
+    return { ChangePlayer ,GameLogic ,FindWinner, resetGame}
 }
 
 // Render GameBoard on Webpage
-const GameBoardContents = () => {
+const GamePlay = (name1,name2) => {
     const gameBoardDiv = document.querySelectorAll(".place");
 	let whichPlayer = 1
     // Event Listener for 3x3 Squares
@@ -82,16 +114,16 @@ const GameBoardContents = () => {
                         square.setAttribute('id', `id${classNumber}p${whichPlayer}`);
 
 						// Change player turn 
-						const { ChangePlayer, GameLogic, FindWinner} = GamePlay();
+						const { ChangePlayer, GameLogic, FindWinner } = GameBoardContents();
                         square.textContent = ChangePlayer(whichPlayer)
 
 						if (whichPlayer === 1){
 							GameLogic(whichPlayer,gameArray)
-							FindWinner(whichPlayer,gameArray)
+							FindWinner(whichPlayer,gameArray,name1,name2)
 						}
 						else{
 							GameLogic(whichPlayer,gameArray2player)
-							FindWinner(whichPlayer,gameArray2player)
+							FindWinner(whichPlayer,gameArray2player,name1,name2)
 						}
 						whichPlayer === 1? whichPlayer = 2 : whichPlayer = 1
                     }
@@ -100,4 +132,31 @@ const GameBoardContents = () => {
     });
 };
 
-GameBoardContents()
+
+
+
+// EVENT LISTENERS
+
+let p1Name = ''
+let p2Name = ''
+// Names Submit
+const getNames = document.querySelector('#player-form')
+getNames.addEventListener('submit', function(event) {
+	event.preventDefault();
+	const player1Name = document.querySelector('#player1').value
+	const player2Name = document.querySelector('#player2').value
+	p1Name = player1Name
+	p2Name = player2Name
+});
+
+// Start game Button
+const startButton = document.querySelector('#start-button');
+		startButton.addEventListener("click", () => {
+			GamePlay(p1Name,p2Name)
+		});
+// Reset game Button
+const restartButton = document.querySelector('#restart-button');
+restartButton.addEventListener("click", () => {
+	GameBoardContents().resetGame()
+});
+
