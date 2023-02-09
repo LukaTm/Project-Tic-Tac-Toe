@@ -2,25 +2,10 @@ let gameArray = [];
 let gameArray2player = [];
 
 const GameBoardContents = () => {
-    let player1Symbol = 'X'
-    let player2Symbol = 'O'
     let player1Turn = true; 
     let player2Turn = false; 
 
-    // Return symbol Based on whichPlayer turn
-    const ChangePlayer = (whichPlayer) => {
-		if (whichPlayer == 1){
-			return player1Symbol;
-		}
-		else{
-			return player2Symbol;
-	}
-    };
-
 	const GameLogic = (whichPlayer,array) =>{
-		let winCombos = [
-			[1, 2, 3],[4, 5, 6],[7, 8, 9],[1, 4, 7],[2, 5, 8],[3, 6, 9],[1, 5, 9],[3, 5, 7],
-		];
 		// Adds game id and which player to gameArray
 		for (let x = 1; x < 10; x++){
 			const gameBoardPlayerPosition = document.querySelector(`#id${x}p${whichPlayer}`);
@@ -36,8 +21,6 @@ const GameBoardContents = () => {
 		}
 		}
 	}
-
-
 
 	// FindS Winner 
 	const FindWinner = (playerWhoWon,array,name1,name2) =>{
@@ -78,8 +61,6 @@ const GameBoardContents = () => {
 		gameArray2player = [];
 		player1Turn = true; 
 		player2Turn = false;
-		playerName = '';
-		player2Name = '';
 		const gameBoardDiv = document.querySelectorAll(".place");
 		gameBoardDiv.forEach((square) => {
 			square.removeAttribute('id');
@@ -90,7 +71,7 @@ const GameBoardContents = () => {
 		document.getElementById("gameboard").style.pointerEvents = "auto";
 	};
 
-    return { ChangePlayer ,GameLogic ,FindWinner, resetGame}
+    return { GameLogic ,FindWinner, resetGame}
 }
 
 // Render GameBoard on Webpage
@@ -112,10 +93,21 @@ const GamePlay = (name1,name2) => {
                     else{
 						// Adds ID with same Number as class | Can track player position
                         square.setAttribute('id', `id${classNumber}p${whichPlayer}`);
+						square.classList.add("markers-style");
 
-						// Change player turn 
-						const { ChangePlayer, GameLogic, FindWinner } = GameBoardContents();
-                        square.textContent = ChangePlayer(whichPlayer)
+						// Display Figure on Board
+						const ChangePlayer = () => {
+							if (whichPlayer == 1){
+								square.classList.add('x')
+							}
+							else{
+								square.classList.add('circle')
+						}
+						};
+						ChangePlayer()
+
+
+						const { GameLogic, FindWinner } = GameBoardContents();
 
 						if (whichPlayer === 1){
 							GameLogic(whichPlayer,gameArray)
@@ -133,20 +125,23 @@ const GamePlay = (name1,name2) => {
 };
 
 
-
-
 // EVENT LISTENERS
 
 let p1Name = ''
 let p2Name = ''
 // Names Submit
 const getNames = document.querySelector('#player-form')
+const getPlayer1Input = document.querySelector('#player1')
+const getPlayer2Input = document.querySelector('#player2')
+
 getNames.addEventListener('submit', function(event) {
 	event.preventDefault();
 	const player1Name = document.querySelector('#player1').value
 	const player2Name = document.querySelector('#player2').value
 	p1Name = player1Name
 	p2Name = player2Name
+	getPlayer1Input.value = ''
+	getPlayer2Input.value = ''
 });
 
 // Start game Button

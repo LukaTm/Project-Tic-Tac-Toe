@@ -10,16 +10,16 @@
 </head>
 <body>
     <div class="container">
-        <button id="start-button">Start Game</button>
-        <button id="restart-button">Restart Game</button>
         <form id="player-form">
-            <label for="player1">Player 1:</label>
-            <input type="text" id="player1" name="player1"><br><br>
+            <label id="test" for="player1">Player 1:</label>
+            <input type="text" id="player1" name="player1"><br>
             <label for="player2">Player 2:</label>
             <input type="text" id="player2" name="player2">
             <input id="submit" type="submit" value="Submit">
         </form> 
-        <div id="gameboard">
+        <button id="start-button">Start Game</button>
+        <button id="restart-button">Restart Game</button>
+        <div id="gameboard" class="board">
             <div class="place place1"></div>
             <div class="place place2"></div>
             <div class="place place3"></div>
@@ -31,6 +31,5 @@
             <div class="place place9"></div>
         </div>
         <div id="game-result"></div>
-    </div>
 </body>
 </html>
