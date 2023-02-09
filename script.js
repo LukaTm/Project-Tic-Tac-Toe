@@ -65,6 +65,8 @@ const GameBoardContents = () => {
 		gameBoardDiv.forEach((square) => {
 			square.removeAttribute('id');
 			square.textContent = '';
+			square.classList.remove('x')
+			square.classList.remove('circle')
 		});
 		const winnerText = document.querySelector('#game-result');
 		winnerText.textContent = '';
