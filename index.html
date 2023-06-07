@@ -1,35 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="script.js" defer></script>
-</head>
-<body>
-    <div class="container">
-        <form id="player-form">
-            <label id="test" for="player1">Player 1:</label>
-            <input type="text" id="player1" name="player1"><br>
-            <label for="player2">Player 2:</label>
-            <input type="text" id="player2" name="player2">
-            <input id="submit" type="submit" value="Submit">
-        </form> 
-        <button id="start-button">Start Game</button>
-        <button id="restart-button">Restart Game</button>
-        <div id="gameboard" class="board">
-            <div class="place place1"></div>
-            <div class="place place2"></div>
-            <div class="place place3"></div>
-            <div class="place place4"></div>
-            <div class="place place5"></div>
-            <div class="place place6"></div>
-            <div class="place place7"></div>
-            <div class="place place8"></div>
-            <div class="place place9"></div>
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link rel="stylesheet" href="output.css" />
+        <script src="script.js" defer></script>
+    </head>
+    <body class="bg-gray-100 w-screen">
+        <div class="mx-auto w-screen">
+            <div class="w-screen">
+                <h1
+                    class="text-3xl font-bold mt-0 w-screen bg-slate-700 text-amber-300 text-center py-7"
+                >
+                    TIC TAC TOE
+                </h1>
+            </div>
+
+            <div
+                class="main-container flex justify-center flex-col w-screen items-center mt-10"
+            >
+                <div class="flex mb-5 mt-8">
+                    <button
+                        id="restart-button"
+                        class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-3 px-5 mx-2 text-5x1 rounded-full"
+                    >
+                        Restart Game
+                    </button>
+                </div>
+                <div class="board">
+                    <div id="gameboard">
+                        <div class="place place1"></div>
+                        <div class="place place2"></div>
+                        <div class="place place3"></div>
+                        <div class="place place4"></div>
+                        <div class="place place5"></div>
+                        <div class="place place6"></div>
+                        <div class="place place7"></div>
+                        <div class="place place8"></div>
+                        <div class="place place9"></div>
+                    </div>
+                    <div class="cross-line"></div>
+                    <div id="game-result" class="congrats-name"></div>
+                </div>
+
+                <div class="flex my-5">
+                    <div class="player1-container flex flex-col items-center">
+                        <span class="mx-5 font-bold text-lg">PLAYER 1(x)</span>
+                        <span class="player1-score">0</span>
+                    </div>
+                    <div class="tie-container flex flex-col items-center">
+                        <span class="mx-5 font-bold text-lg">TIE</span>
+                        <span class="tie-score">0</span>
+                    </div>
+                    <div class="player2-container flex flex-col items-center">
+                        <span class="mx-5 font-bold text-lg">PLAYER 2(o)</span>
+                        <span class="player2-score">0</span>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div id="game-result"></div>
-</body>
+    </body>
 </html>

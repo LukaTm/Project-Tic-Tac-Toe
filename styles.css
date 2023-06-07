@@ -1,95 +1,216 @@
-body{
-    height: 100vh;
-    display: grid;
-    justify-items: center;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: my-custom-start2P-font;
+    src: url(./font-styles/PressStart2P-Regular.ttf);
+}
+
+h1 {
+    font-family: my-custom-start2P-font;
 }
 
 #gameboard {
     display: grid;
     width: 500px;
     height: 500px;
-    grid-template-rows: repeat(3,1fr);
-    grid-template-columns:repeat(3,1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     grid-gap: 10px;
     background-color: rgb(0, 0, 0);
     margin-top: 10px;
-
-}
-#gameboard > div{
-    font-size: 100px;
+    position: relative;
 }
 
-.place{
+.place {
     display: grid;
     background-color: white;
 }
-.place:hover{
+.place:hover {
     cursor: pointer;
 }
 
-#start-button, #restart-button{
-    margin-bottom: 10px;
-    margin-left: 10px;
-    height: 40px;
-    width: 100px;
-}
-
-button,#submit{
+button,
+#submit {
     margin-top: 15px;
     cursor: pointer;
 }
 
-
-
-
-
-:root {
-    --cell-size:160px;
-    --mark-size: calc(var(--cell-size) * .9);
+.congrats-name {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3em;
+    color: rgb(57, 5, 245);
+    font-weight: bold;
 }
 
+:root {
+    --cell-size: 160px;
+    --mark-size: calc(var(--cell-size) * 0.8);
+}
 
-.place{
+.place {
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
 }
 
+/* TRANSPERENT BACKGROUND TO DECLARE WINNER */
+/* #gameboard.winner-results {
+    background-color: rgb(0, 0, 0, 0.1);
+}
+.place.circle.winner-results::before {
+    background-color: rgb(0, 0, 0, 0.1);
+}
+.place.x.winner-results::before {
+    background-color: rgb(0, 0, 0, 0.1);
+}
+.place.x.winner-results::after {
+    background-color: rgb(0, 0, 0, 0.1);
+} */
+
 .place.x::before,
-.place.x::after{
-    content: '';
+.place.x::after {
+    content: "";
     position: absolute;
-    width: calc(var(--mark-size) * .15);
+    width: calc(var(--mark-size) * 0.13);
     height: var(--mark-size);
     background-color: black;
 }
-    
-.place.x::before{
+
+.place.x::before {
     transform: rotate(45deg);
+    border-radius: 3px;
 }
 
-.place.x::after{
-    transform: rotate(-45deg)
+.place.x::after {
+    transform: rotate(-45deg);
+    border-radius: 3px;
 }
-
-
 
 .place.circle::before,
-.place.circle::after{
-    content: '';
+.place.circle::after {
+    content: "";
     position: absolute;
     border-radius: 50%;
 }
 
+.board {
+    display: flex;
+    position: relative;
+}
+
+/*  X lines */
+.cross-line.left-to-right::before {
+    content: "";
+    width: 8px;
+    height: 675px;
+    position: absolute;
+    transform: rotate(-45deg);
+    left: 50%;
+    bottom: -91px;
+    border-radius: 5px;
+
+    background-color: rgb(255, 0, 0);
+}
+
+/* right-to-left */
+.cross-line.right-to-left::after {
+    content: "";
+    width: 8px;
+    height: 675px;
+    position: absolute;
+    transform: rotate(45deg);
+    bottom: -84px;
+    left: 50%;
+
+    background-color: rgb(255, 0, 0);
+}
+/*  |||||||||||||  */
+/* right */
+.cross-line.right::before {
+    content: "";
+    width: 8px;
+    height: 485px;
+    position: absolute;
+    top: 17px;
+    right: 15.7%;
+    border-radius: 5px;
+
+    background-color: rgb(255, 0, 0);
+}
+
+/* left */
+.cross-line.left::after {
+    content: "";
+    width: 8px;
+    height: 485px;
+    position: absolute;
+    top: 17px;
+    left: 15.2%;
+    border-radius: 5px;
+    background-color: rgb(255, 0, 0);
+}
+/* HORIZONTAL */
+.cross-line.first::before {
+    content: "";
+    width: 485px;
+    height: 8px;
+    position: absolute;
+    top: 16.7%;
+    left: 8px;
+    border-radius: 5px;
+    background-color: rgb(255, 0, 0);
+}
+
+.cross-line.second::before {
+    content: "";
+    width: 485px;
+    height: 8px;
+    position: absolute;
+    top: 50%;
+    left: 8px;
+    border-radius: 5px;
+    background-color: rgb(255, 0, 0);
+}
+.cross-line.third::after {
+    content: "";
+    width: 485px;
+    height: 8px;
+    position: absolute;
+    top: 83.5%;
+    left: 8px;
+    border-radius: 5px;
+    background-color: rgb(255, 0, 0);
+}
+
+.cross-line.middle::before {
+    content: "";
+    width: 8px;
+    height: 485px;
+    position: absolute;
+    top: 17px;
+    left: 49.4%;
+    border-radius: 5px;
+
+    background-color: rgb(255, 0, 0);
+}
+
 .place.circle::before {
-    width: var(--mark-size);
-    height: var(--mark-size);
+    width: calc(var(--mark-size) - 5px);
+    height: calc(var(--mark-size) - 5px);
     background-color: black;
 }
 .place.circle::after {
-    width: calc(var(--mark-size)* .7);
-    height: calc(var(--mark-size)* .7);
+    width: calc(var(--mark-size) * 0.7);
+    height: calc(var(--mark-size) * 0.7);
     background-color: rgb(255, 255, 255);
 }
-    
+
+.place {
+    background-color: #e4ebf1;
+}
