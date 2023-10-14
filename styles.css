@@ -104,32 +104,41 @@ button,
 .board {
     display: flex;
     position: relative;
+    width: 500px;
+    height: 500px;
 }
 
 /*  X lines */
 .cross-line.left-to-right::before {
     content: "";
-    width: 8px;
-    height: 675px;
+    width: calc(100% + 33%); /* Diagonal length */
+    height: 8px; /* Line thickness */
     position: absolute;
-    transform: rotate(-45deg);
-    left: 50%;
-    bottom: -91px;
+    top: 20px; /* Align with the top edge of the container */
+    left: 15px; /* Align with the left edge of the container */
+    transform: rotate(
+        45deg
+    ); /* Rotate by 45 degrees for top-left to bottom-right */
+    transform-origin: left top; /* Set the rotation origin to the top-left corner */
     border-radius: 5px;
-
     background-color: rgb(255, 0, 0);
 }
 
 /* right-to-left */
 .cross-line.right-to-left::after {
     content: "";
-    width: 8px;
-    height: 675px;
+    width: calc(
+        100% + 33%
+    ); /* Set width to approximately match the diagonal length of the square */
+    height: 8px; /* Set the line thickness */
     position: absolute;
-    transform: rotate(45deg);
-    bottom: -84px;
-    left: 50%;
-
+    top: 20px; /* Align with the vertical center of the container */
+    right: 15px; /* Align with the right edge of the container */
+    transform: rotate(
+        -45deg
+    ); /* Rotate by -45 degrees for top-right to bottom-left */
+    transform-origin: right top; /* Set the rotation origin to the top-right corner */
+    border-radius: 5px;
     background-color: rgb(255, 0, 0);
 }
 /*  |||||||||||||  */
@@ -137,10 +146,10 @@ button,
 .cross-line.right::before {
     content: "";
     width: 8px;
-    height: 485px;
+    height: 95%;
     position: absolute;
     top: 17px;
-    right: 15.7%;
+    right: 15%;
     border-radius: 5px;
 
     background-color: rgb(255, 0, 0);
@@ -150,17 +159,17 @@ button,
 .cross-line.left::after {
     content: "";
     width: 8px;
-    height: 485px;
+    height: 95%;
     position: absolute;
     top: 17px;
-    left: 15.2%;
+    left: 15%;
     border-radius: 5px;
     background-color: rgb(255, 0, 0);
 }
 /* HORIZONTAL */
 .cross-line.first::before {
     content: "";
-    width: 485px;
+    width: 95%;
     height: 8px;
     position: absolute;
     top: 16.7%;
@@ -171,20 +180,20 @@ button,
 
 .cross-line.second::before {
     content: "";
-    width: 485px;
+    width: 95%;
     height: 8px;
     position: absolute;
-    top: 50%;
+    top: 51%;
     left: 8px;
     border-radius: 5px;
     background-color: rgb(255, 0, 0);
 }
 .cross-line.third::after {
     content: "";
-    width: 485px;
+    width: 95%;
     height: 8px;
     position: absolute;
-    top: 83.5%;
+    top: 85.5%;
     left: 8px;
     border-radius: 5px;
     background-color: rgb(255, 0, 0);
@@ -193,7 +202,7 @@ button,
 .cross-line.middle::before {
     content: "";
     width: 8px;
-    height: 485px;
+    height: 95%;
     position: absolute;
     top: 17px;
     left: 49.4%;
@@ -224,6 +233,12 @@ button,
         min-width: 200px;
         min-height: 200px;
     }
+    .board {
+        width: 80vw;
+        height: 80vw;
+        min-width: 200px;
+        min-height: 200px;
+    }
 
     .place.circle::before {
         width: calc(var(--mark-small-size) - 5px);
@@ -245,6 +260,83 @@ button,
         background-color: black;
     }
 }
+
+@media (max-width: 500px) {
+    /*  X lines */
+    .cross-line.left-to-right::before {
+        height: 6px;
+    }
+
+    /* right-to-left */
+    .cross-line.right-to-left::after {
+        height: 6px;
+    }
+    /* right */
+    .cross-line.right::before {
+        width: 6px;
+    }
+
+    /* left */
+    .cross-line.left::after {
+        width: 6px;
+    }
+    /* HORIZONTAL */
+    .cross-line.first::before {
+        height: 6px;
+        top: 18.5%;
+    }
+
+    .cross-line.second::before {
+        height: 6px;
+        top: 51.5%;
+    }
+    .cross-line.third::after {
+        height: 6px;
+        top: 86.5%;
+    }
+
+    .cross-line.middle::before {
+        width: 6px;
+    }
+}
+@media (max-width: 350px) {
+    /*  X lines */
+    .cross-line.left-to-right::before {
+        height: 4px;
+    }
+
+    /* right-to-left */
+    .cross-line.right-to-left::after {
+        height: 4px;
+    }
+    /* right */
+    .cross-line.right::before {
+        width: 4px;
+    }
+
+    /* left */
+    .cross-line.left::after {
+        width: 4px;
+    }
+    /* HORIZONTAL */
+    .cross-line.first::before {
+        height: 4px;
+    }
+
+    .cross-line.second::before {
+        height: 4px;
+        top: 53%;
+    }
+    .cross-line.third::after {
+        height: 4px;
+        top: 88.5%;
+    }
+
+    .cross-line.middle::before {
+        width: 4px;
+    }
+}
+
 @media (width < 280px) {
     #gameboard {
         width: 80vw;
