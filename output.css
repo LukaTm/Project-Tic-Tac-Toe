@@ -644,6 +644,13 @@ video {
   outline-style: solid;
 }
 
+:root {
+  --cell-size: 160px;
+  --cell-small-size: 53vw;
+  --mark-size: calc(var(--cell-size) * 0.8);
+  --mark-small-size: calc(var(--cell-small-size) * 0.4);
+}
+
 @font-face {
   font-family: my-custom-start2P-font;
 
@@ -689,11 +696,6 @@ button,
   font-size: 3em;
   color: rgb(57, 5, 245);
   font-weight: bold;
-}
-
-:root {
-  --cell-size: 160px;
-  --mark-size: calc(var(--cell-size) * 0.8);
 }
 
 .place {
@@ -864,6 +866,66 @@ button,
 
 .place {
   background-color: #e4ebf1;
+}
+
+@media (width < 580px) {
+  #gameboard {
+    width: 80vw;
+    height: 80vw;
+    min-width: 200px;
+    min-height: 200px;
+  }
+
+  .place.circle::before {
+    width: calc(var(--mark-small-size) - 5px);
+    height: calc(var(--mark-small-size) - 5px);
+    background-color: black;
+  }
+
+  .place.circle::after {
+    width: calc(var(--mark-small-size) * 0.7);
+    height: calc(var(--mark-small-size) * 0.7);
+    background-color: rgb(255, 255, 255);
+  }
+
+  .place.x::before,
+    .place.x::after {
+    content: "";
+    position: absolute;
+    width: calc(var(--mark-small-size) * 0.13);
+    height: var(--mark-small-size);
+    background-color: black;
+  }
+}
+
+@media (width < 280px) {
+  #gameboard {
+    width: 80vw;
+    height: 80vw;
+    min-width: 200px;
+    min-height: 200px;
+  }
+
+  .place.circle::before {
+    width: calc(50px);
+    height: calc(50px);
+    background-color: black;
+  }
+
+  .place.circle::after {
+    width: calc(38px);
+    height: calc(38px);
+    background-color: rgb(255, 255, 255);
+  }
+
+  .place.x::before,
+    .place.x::after {
+    content: "";
+    position: absolute;
+    width: 7px;
+    height: 55px;
+    background-color: black;
+  }
 }
 
 .hover\:bg-blue-700:hover {
